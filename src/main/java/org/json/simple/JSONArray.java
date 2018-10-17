@@ -16,7 +16,7 @@ import java.util.Iterator;
  * 
  * @author FangYidong&lt;fangyidong@yahoo.com.cn&gt;
  */
-public class JSONArray extends ArrayList implements JSONAware, JSONStreamAware {
+public class JSONArray extends ArrayList<Object> implements JSONAware, JSONStreamAware {
 	private static final long serialVersionUID = 3957988303675231981L;
 	
 	/**
@@ -32,7 +32,7 @@ public class JSONArray extends ArrayList implements JSONAware, JSONStreamAware {
 	 * 
 	 * @param c the collection whose elements are to be placed into this JSONArray
 	 */
-	public JSONArray(Collection c){
+	public JSONArray(Collection<?> c){
 		super(c);
 	}
 	

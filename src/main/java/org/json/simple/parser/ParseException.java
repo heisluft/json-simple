@@ -69,7 +69,7 @@ public class ParseException extends Exception {
 	}
 	
 	public String getMessage() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		
 		switch(errorType){
 		case ERROR_UNEXPECTED_CHAR:
