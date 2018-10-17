@@ -24,6 +24,69 @@ manifest {
     )
 }
 
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    javadocJar
+    sourcesJar
+}
+
+publishing {
+    def header = System.getProperty("header")
+    if(header == null) return
+    publications {
+        repositories {
+            maven {
+                url 'http://heisluft.bplaced.net/upload/'
+                credentials(HttpHeaderCredentials) {
+                    name = "Private-Token"
+                    value = header
+                }
+                authentication {
+                    viaHeader(HttpHeaderAuthentication)
+                }
+            }
+        }
+        maven(MavenPublication) {
+            pom {
+                licenses {
+                    license {
+                        name = 'The Apache Software License, Version 2.0'
+                        url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'Yidong'
+                        name = 'Yidong Fang'
+                        email = 'fangyidong@yahoo.com.cn'
+                    }
+                    developer {
+                        id = 'heisluft'
+                        name = 'heisluft'
+                        email = 'heisluftlp@gmail.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/heisluft/json-simple'
+                    developerConnection = 'scm:git:https://github.com/heisluft/json-simple'
+                    url = 'https://github.com/heisluft/json-simple'
+                }
+            }
+        }
+    }
+}
+
+publish.dependsOn test
+
 repositories {
     mavenCentral()
 }
