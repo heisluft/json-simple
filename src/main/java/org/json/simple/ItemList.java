@@ -12,7 +12,7 @@ import java.util.StringTokenizer;
  * |a:b:c| => |a|,|b|,|c|
  * |:| => ||,||
  * |a:| => |a|,||
- * @author FangYidong<fangyidong@yahoo.com.cn>
+ * @author FangYidong&lt;fangyidong@yahoo.com.cn&gt;
  */
 public class ItemList {
 	private String sp=",";
