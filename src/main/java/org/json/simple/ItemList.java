@@ -9,9 +9,9 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 /**
- * |a:b:c| => |a|,|b|,|c|
- * |:| => ||,||
- * |a:| => |a|,||
+ * |a:b:c| =&gt; |a|,|b|,|c|
+ * |:| =&gt; ||,||
+ * |a:| =&gt; |a|,||
  * @author FangYidong&lt;fangyidong@yahoo.com.cn&gt;
  */
 public class ItemList {
