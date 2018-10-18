@@ -2,7 +2,7 @@ apply plugin: 'java'
 apply plugin: 'maven-publish'
 
 group = 'com.googlecode.json-simple'
-version = '1.1.1'
+version = '1.2.0'
 
 description = "JSON.simple - A simple Java toolkit for JSON"
 
@@ -45,17 +45,20 @@ publishing {
     repositories {
         maven {
             url 'http://heisluft.bplaced.net/upload/'
-            credentials(HttpHeaderCredentials) {
-                name = login[0]
-                value = login[1]
+            credentials {
+                username = login[0]
+                password = login[1]
             }
             authentication {
-                viaHeader(HttpHeaderAuthentication)
+                basic(BasicAuthentication)
             }
         }
     }
     publications {
         maven(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
             pom {
                 licenses {
                     license {
