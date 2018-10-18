@@ -12,6 +12,9 @@ public interface JSONStreamAware {
 	/**
 	 * write JSON string to out.
 	 *
+	 * @param out
+	 * 		the writer to write to
+	 *
 	 * @throws IOException
 	 * 		if there is a problem within the writer
 	 */

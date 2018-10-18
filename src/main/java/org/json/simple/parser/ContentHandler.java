@@ -121,6 +121,8 @@ public interface ContentHandler {
 	 *
 	 * @throws ParseException
 	 * 		JSONParser will stop and throw the same exception to the caller when receiving this exception.
+	 * @throws IOException
+	 * 		if there is an IO error while reading
 	 */
 	boolean primitive(Object value) throws ParseException, IOException;
 

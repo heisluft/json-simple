@@ -47,6 +47,8 @@ public class JSONArray extends ArrayList<Object> implements JSONAware, JSONStrea
 	 * @param out
 	 * 		the writer to write to
 	 *
+	 * @throws IOException
+	 * 		if there is an IO error while writing
 	 * @see org.json.simple.JSONValue#writeJSONString(Object, Writer)
 	 */
 	public static void writeJSONString(Collection collection, Writer out) throws IOException {
