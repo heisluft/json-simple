@@ -42,19 +42,19 @@ artifacts {
 publishing {
     def header = System.getProperty("header")
     if(header == null) return
-    publications {
-        repositories {
-            maven {
-                url 'http://heisluft.bplaced.net/upload/'
-                credentials(HttpHeaderCredentials) {
-                    name = "Private-Token"
-                    value = header
-                }
-                authentication {
-                    viaHeader(HttpHeaderAuthentication)
-                }
+    repositories {
+        maven {
+            url 'http://heisluft.bplaced.net/upload/'
+            credentials(HttpHeaderCredentials) {
+                name = "Private-Token"
+                value = header
+            }
+            authentication {
+                viaHeader(HttpHeaderAuthentication)
             }
         }
+    }
+    publications {
         maven(MavenPublication) {
             pom {
                 licenses {
