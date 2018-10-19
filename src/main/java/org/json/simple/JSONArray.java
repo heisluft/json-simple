@@ -56,15 +56,18 @@ public class JSONArray extends ArrayList<Object> implements JSONAware, JSONStrea
 			out.write("null");
 			return;
 		}
-
-		boolean first = true;
 		Iterator iter = collection.iterator();
-
 		out.write('[');
+		if(iter.hasNext()) {
+			Object value = iter.next();
+			if(value == null) {
+				out.write("null");
+			} else {
+				JSONValue.writeJSONString(value, out);
+			}
+		}
 		while(iter.hasNext()) {
-			if(first) first = false;
-			else out.write(',');
-
+			out.write(',');
 			Object value = iter.next();
 			if(value == null) {
 				out.write("null");

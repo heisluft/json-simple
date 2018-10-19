@@ -62,14 +62,19 @@ public class JSONObject extends HashMap<String, Object> implements JSONAware, JS
 		Iterator iter = map.entrySet().iterator();
 
 		out.write('{');
-		while(iter.hasNext()) {
-			if(first) first = false;
-			else out.write(',');
+		if(iter.hasNext()) {
 			Map.Entry entry = (Map.Entry) iter.next();
 			out.write('\"');
 			out.write(escape(String.valueOf(entry.getKey())));
+			out.write("\":");
+			JSONValue.writeJSONString(entry.getValue(), out);
+		}
+		while(iter.hasNext()) {
+			out.write(',');
+			Map.Entry entry = (Map.Entry) iter.next();
 			out.write('\"');
-			out.write(':');
+			out.write(escape(String.valueOf(entry.getKey())));
+			out.write("\":");
 			JSONValue.writeJSONString(entry.getValue(), out);
 		}
 		out.write('}');
