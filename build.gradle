@@ -91,7 +91,7 @@ repositories {
 }
 
 signing {
-    sign publishing.publications.maven
+   // sign publishing.publications.maven
 }
 
 dependencies {
