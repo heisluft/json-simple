@@ -1,9 +1,11 @@
-apply plugin: 'java'
-apply plugin: 'maven-publish'
-apply plugin: 'signing'
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'signing'
+}
 
 group = 'com.googlecode.json-simple'
-version = '1.2.0'
+version = '1.3.0'
 
 description = "JSON.simple - A simple Java toolkit for JSON"
 
@@ -17,7 +19,7 @@ tasks.withType(JavaCompile) {
 manifest {
     attributes(
             "Bundle-Name": "JSON.simple",
-            "Bundle-SymbolicName": "com.googlecode.json-simple.json-simple",
+            "Bundle-SymbolicName": "${project.group}.${project.name}",
             "Bundle-Version": "${project.version}",
             "Bundle-License": "http://www.apache.org/licenses/LICENSE-2.0.txt",
             "Bundle-Description": "A simple Java toolkit for JSON",
@@ -26,19 +28,19 @@ manifest {
 }
 
 task sourcesJar(type: Jar) {
-    classifier = 'sources'
+    archiveClassifier.set('sources')
     from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar) {
     from javadoc
-    classifier = 'javadoc'
+    archiveClassifier.set('javadoc')
 }
 
 publishing {
     repositories {
         maven {
-            url 'http://heisluft.bplaced.net/upload/'
+            url 'http://heisluft.bplaced.net/maven/'
             credentials {
                 username = mavenUsername
                 password = mavenPassword

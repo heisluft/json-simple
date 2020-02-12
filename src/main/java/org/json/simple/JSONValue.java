@@ -108,6 +108,7 @@ public class JSONValue {
 	 * @see org.json.simple.JSONObject#writeJSONString(Map, Writer)
 	 * @see org.json.simple.JSONArray#writeJSONString(Collection, Writer)
 	 */
+	@SuppressWarnings("unchecked")
 	public static void writeJSONString(Object value, Writer out) throws IOException {
 		if(value == null) {
 			out.write("null");
@@ -154,12 +155,12 @@ public class JSONValue {
 		}
 
 		if(value instanceof Map) {
-			JSONObject.writeJSONString((Map) value, out);
+			JSONObject.writeJSONString((Map<String, Object>) value, out);
 			return;
 		}
 
 		if(value instanceof Collection) {
-			JSONArray.writeJSONString((Collection) value, out);
+			JSONArray.writeJSONString((Collection<Object>) value, out);
 			return;
 		}
 

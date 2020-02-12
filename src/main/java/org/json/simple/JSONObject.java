@@ -33,7 +33,7 @@ public class JSONObject extends HashMap<String, Object> implements JSONAware, JS
 	 * @param map
 	 * 		the initial values
 	 */
-	public JSONObject(Map<String, ?> map) {
+	public JSONObject(Map<String, Object> map) {
 		super(map);
 	}
 
@@ -52,26 +52,16 @@ public class JSONObject extends HashMap<String, Object> implements JSONAware, JS
 	 * 		if there is a problem within the writer
 	 * @see org.json.simple.JSONValue#writeJSONString(Object, Writer)
 	 */
-	public static void writeJSONString(Map map, Writer out) throws IOException {
+	public static void writeJSONString(Map<String, Object> map, Writer out) throws IOException {
 		if(map == null) {
 			out.write("null");
 			return;
 		}
-
 		boolean first = true;
-		Iterator iter = map.entrySet().iterator();
-
 		out.write('{');
-		if(iter.hasNext()) {
-			Map.Entry entry = (Map.Entry) iter.next();
-			out.write('\"');
-			out.write(escape(String.valueOf(entry.getKey())));
-			out.write("\":");
-			JSONValue.writeJSONString(entry.getValue(), out);
-		}
-		while(iter.hasNext()) {
-			out.write(',');
-			Map.Entry entry = (Map.Entry) iter.next();
+		for (Entry<String, Object> entry : map.entrySet()) {
+			if (first) first = false;
+			else out.write(',');
 			out.write('\"');
 			out.write(escape(String.valueOf(entry.getKey())));
 			out.write("\":");
@@ -91,7 +81,7 @@ public class JSONObject extends HashMap<String, Object> implements JSONAware, JS
 	 *
 	 * @see org.json.simple.JSONValue#toJSONString(Object)
 	 */
-	public static String toJSONString(Map map) {
+	public static String toJSONString(Map<String, Object> map) {
 		final StringWriter writer = new StringWriter();
 
 		try {
@@ -101,6 +91,45 @@ public class JSONObject extends HashMap<String, Object> implements JSONAware, JS
 			// This should never happen with a StringWriter
 			throw new RuntimeException(e);
 		}
+	}
+
+	/**
+	 * Convenience Method to get a value as an instance of type JSONObject
+	 * @param key the key
+	 * @return the casted value
+	 */
+	public JSONObject getObject(String key) {
+		if(!containsKey(key)) return null;
+		return (JSONObject) get(key);
+	}
+	/**
+	 * Convenience Method to get a value as an instance of type String
+	 * @param key the key
+	 * @return the casted value
+	 */
+	public String getString(String key) {
+		if(!containsKey(key)) return null;
+		return (String) get(key);
+	}
+	/**
+	 * Convenience Method to get a value as an instance of type JSONArray
+	 * @param key the key
+	 * @return the casted value
+	 */
+	public JSONArray getArray(String key) {
+		if(!containsKey(key)) return null;
+		return (JSONArray) get(key);
+	}
+
+	/**
+	 * Convenience Method to get a value as an int
+	 * @param key the key
+	 * @return the casted value
+	 * @throws RuntimeException if the map does not contain the specified key
+	 */
+	public int getInt(String key) {
+		if(!containsKey(key)) throw new RuntimeException("Map does not contain key '" + key + "'");
+		return (Integer) get(key);
 	}
 
 	public static String toString(String key, Object value) {

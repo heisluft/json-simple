@@ -51,12 +51,12 @@ public class JSONArray extends ArrayList<Object> implements JSONAware, JSONStrea
 	 * 		if there is an IO error while writing
 	 * @see org.json.simple.JSONValue#writeJSONString(Object, Writer)
 	 */
-	public static void writeJSONString(Collection collection, Writer out) throws IOException {
+	public static void writeJSONString(Collection<?> collection, Writer out) throws IOException {
 		if(collection == null) {
 			out.write("null");
 			return;
 		}
-		Iterator iter = collection.iterator();
+		Iterator<?> iter = collection.iterator();
 		out.write('[');
 		if(iter.hasNext()) {
 			Object value = iter.next();
@@ -90,7 +90,7 @@ public class JSONArray extends ArrayList<Object> implements JSONAware, JSONStrea
 	 *
 	 * @see org.json.simple.JSONValue#toJSONString(Object)
 	 */
-	public static String toJSONString(Collection collection) {
+	public static String toJSONString(Collection<?> collection) {
 		final StringWriter writer = new StringWriter();
 
 		try {
